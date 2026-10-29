@@ -3,6 +3,7 @@
 // a un lado `imagen` (3:4) y `items` (formación, colegiación, idiomas…) como lista con icono.
 // `galeria` opcional: tira de fotos del espacio bajo el texto. Todo lo vacío se omite.
 import { seccion, parrafos, cadena } from '../../data/site';
+import { altGaleria, altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -31,7 +32,7 @@ const lateral = !!(s && (s.imagen || s.items.length > 0));
         </div>
         {lateral && (
           <aside class="lg:col-span-4 lg:col-start-9">
-            {s.imagen && <Imagen src={s.imagen} alt="" ancho={900} alto={1200} class="aspect-[3/4] w-full rounded-md object-cover" />}
+            {s.imagen && <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1200} class="aspect-[3/4] w-full rounded-md object-cover" />}
             {s.items.length > 0 && (
               <ul class:list={['datos-contacto', s.imagen && 'mt-8']}>
                 {s.items.map((it) => (
@@ -52,9 +53,9 @@ const lateral = !!(s && (s.imagen || s.items.length > 0));
       </div>
       {s.galeria.length > 0 && (
         <ul class="mt-14 grid grid-cols-3 gap-2 md:mt-20 md:gap-5">
-          {s.galeria.map((g) => (
+          {s.galeria.map((g, i) => (
             <li>
-              <Imagen src={g} alt="" ancho={900} alto={675} class="aspect-square w-full rounded-md object-cover sm:aspect-[4/3]" />
+              <Imagen src={g} alt={altGaleria(i)} ancho={900} alto={675} class="aspect-square w-full rounded-md object-cover sm:aspect-[4/3]" />
             </li>
           ))}
         </ul>

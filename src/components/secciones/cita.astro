@@ -3,6 +3,7 @@
 // `enlace_agenda` (url de una agenda online), un segundo botón con `texto_agenda`. `nota` en pequeño debajo.
 // `imagen` opcional a la derecha. El teléfono de site.yaml → contacto se muestra si existe.
 import { seccion, site, tel, cadena, enlace } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
@@ -40,7 +41,7 @@ const telefono = site.contacto.telefono;
           {nota && <p class="suave mt-6 max-w-[36rem] text-sm">{nota}</p>}
         </div>
         {s.imagen && (
-          <Imagen src={s.imagen} alt="" ancho={900} alto={1125} class="aspect-[4/5] w-full max-w-md justify-self-end rounded-md object-cover md:col-span-5" />
+          <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1125} class="aspect-[4/5] w-full max-w-md justify-self-end rounded-md object-cover md:col-span-5" />
         )}
       </div>
     </Seccion>

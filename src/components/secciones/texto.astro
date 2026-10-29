@@ -3,6 +3,7 @@
 // entre comillas, imagen opcional a la derecha, lista con iconos y botón.
 // Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
 import { seccion, parrafos, cadena } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
@@ -41,7 +42,7 @@ const declaracion = cadena(s?.declaracion);
           )}
           {s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
         </div>
-        {s.imagen && <Imagen src={s.imagen} alt="" ancho={900} alto={1125} class="aspect-[4/5] w-full rounded-md object-cover md:col-span-5" />}
+        {s.imagen && <Imagen src={s.imagen} alt={altSeccion(s)} ancho={900} alto={1125} class="aspect-[4/5] w-full rounded-md object-cover md:col-span-5" />}
       </div>
     </Seccion>
   )

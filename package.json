@@ -1,6 +1,6 @@
 {
   "name": "plantilla-profesional-autonomo",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "description": "Plantilla NoExpertise «Profesional independiente» basada en AstroWind (MIT)",
   "private": true,
   "type": "module",

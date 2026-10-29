@@ -3,6 +3,7 @@
 // `items: [{titulo, texto, icono, precio, duracion}]`: precio y duración son opcionales (vacíos no se pintan).
 // `imagen` opcional como franja panorámica sobre la lista; `cta` opcional al final.
 import { seccion, cadena } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -15,7 +16,7 @@ const s = seccion(Astro.props.id);
   s && (
     <Seccion id={Astro.props.id}>
       <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
-      {s.imagen && <Imagen src={s.imagen} alt="" ancho={1600} alto={686} class="mb-12 aspect-[16/9] w-full rounded-md object-cover md:aspect-[21/9]" />}
+      {s.imagen && <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1600} alto={686} class="mb-12 aspect-[16/9] w-full rounded-md object-cover md:aspect-[21/9]" />}
       {s.items.length > 0 && (
         <ul class="lista-servicios">
           {s.items.map((it) => {

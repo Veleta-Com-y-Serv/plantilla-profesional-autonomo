@@ -9,6 +9,7 @@ trabajan por su cuenta: retrato, trayectoria, servicios con precio opcional y pe
   `testimonios[].nota`, `cita.enlace_agenda/texto_agenda/nota`, `contacto.boton`.
 - Diseño: arena + carbón + terracota, serif del sistema para títulos, portada asimétrica 5/7, columna de lectura
   de 44 rem, línea de tiempo, comillas grandes, cabecera con menú de texto y pie de una sola línea.
+- SEO de base incluido (`src/lib/seo.ts`): canónica, og:image, JSON-LD del negocio y de las preguntas frecuentes, `robots.txt`, `sitemap.xml` y `llms.txt`; `noindex` si `seo.indexable: false`.
 - Contenido editable en `site.yaml`; metadatos en `template.yaml`; reglas para el agente en `CLAUDE.md`;
   fotos a generar en `fotos.json`.
 
