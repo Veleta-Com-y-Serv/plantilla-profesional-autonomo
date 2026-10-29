@@ -1,0 +1,145 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+# Listas planas: nunca una lista dentro de un elemento de lista. Precios siempre entre comillas.
+nombre: Clara Montes
+eslogan: Psicóloga sanitaria en Logroño y online.
+sector: psicologia
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#9c4426"
+  acento: "#b5654a"
+  fondo: "#f4ede3"
+  texto: "#2a2725"
+contacto:
+  telefono: "941 26 47 18"
+  email: consulta@claramontes.es
+  direccion: Calle Portales 41, 2.º izquierda, 26001 Logroño
+  horario: "Lunes a jueves, de 9:30 a 20:00. Viernes, de 9:30 a 14:00."
+  whatsapp: "623 418 905"
+redes:
+  instagram: https://www.instagram.com/
+  facebook: ""
+  linkedin: https://www.linkedin.com/
+menu:
+  - { texto: Sobre mí, url: "/#sobre" }
+  - { texto: Trayectoria, url: "/#trayectoria" }
+  - { texto: Servicios, url: "/#servicios" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Pedir cita, url: "/#cita" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: "", url: "" }   # vacío a propósito: esta cabecera no lleva botón
+seo:
+  titulo: Clara Montes · Psicóloga en Logroño y online
+  descripcion: "Psicóloga sanitaria en Logroño. Terapia para adultos y adolescentes: ansiedad, duelo y autoestima. Consulta presencial y online."
+  tipo: ProfessionalService
+marca_pie: true
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Psicóloga sanitaria · Logroño y online
+    titulo: Te acompaño a entender lo que te pasa y a dar el siguiente paso.
+    texto: "Terapia para adultos y adolescentes: ansiedad, duelo, autoestima y momentos de cambio. Sin prisas y con un plan claro desde el principio."
+    imagen: /placeholders/persona.svg
+    destacado: { titulo: Consulta online y presencial, texto: "En mi despacho del centro de Logroño o por videollamada, con el mismo cuidado.", icono: portatil }
+    cta: { texto: Pedir primera cita, url: "/#cita" }
+    cta_secundario: { texto: Ver cómo trabajo, url: "/#proceso" }
+
+  sobre:
+    activa: true
+    antetitulo: Sobre mí
+    titulo: Soy Clara. Escucho primero y propongo después.
+    declaracion: "Ningún problema es pequeño si te quita el sueño."
+    texto: |
+      Me formé en Salamanca y trabajé cuatro años en un centro de psicología de Pamplona antes de abrir mi consulta en Logroño.
+
+      Trabajo con terapia cognitivo-conductual y con herramientas de tercera generación. Me adapto a ti: hay personas que necesitan pautas concretas y otras que necesitan, sobre todo, tiempo para ordenar lo que sienten.
+
+      La consulta es un espacio tranquilo y discreto, a dos minutos de la plaza del Mercado. Si lo prefieres, hacemos las sesiones por videollamada.
+    imagen: /fotos/consulta.jpg
+    items:
+      - { titulo: Máster en Psicología General Sanitaria, texto: "Habilitada para la atención psicológica sanitaria.", icono: birrete }
+      - { titulo: Colegiada LR-01842, texto: "Colegio profesional de la psicología de La Rioja.", icono: insignia }
+      - { titulo: Castellano e inglés, texto: "Sesiones en los dos idiomas.", icono: idiomas }
+    galeria:
+      - /fotos/despacho-sillones.jpg
+      - /fotos/despacho-detalle.jpg
+      - /fotos/despacho-ventana.jpg
+
+  trayectoria:
+    activa: true
+    antetitulo: Trayectoria
+    titulo: De dónde vengo
+    texto: "Formación continua y muchas horas de consulta. Estos son los pasos que me han traído hasta aquí."
+    imagen: /fotos/trayectoria.jpg
+    hitos:
+      - { anio: "2014", titulo: Grado en Psicología, texto: "Universidad de Salamanca. Prácticas en un centro de día de salud mental." }
+      - { anio: "2016", titulo: Máster sanitario, texto: "Habilitación como psicóloga general sanitaria y primeras consultas supervisadas." }
+      - { anio: "2017", titulo: Centro de psicología en Pamplona, texto: "Cuatro años en un equipo de terapia para adultos, parejas y familias." }
+      - { anio: "2021", titulo: Consulta propia en Logroño, texto: "Abro mi despacho en el centro y empiezo con las sesiones online." }
+      - { anio: "2024", titulo: Formación en duelo y trauma, texto: "Especialización en acompañamiento en pérdidas y en EMDR." }
+      - { anio: Hoy, titulo: Terapia individual y talleres, texto: "Consulta diaria y talleres de gestión de la ansiedad para grupos pequeños." }
+
+  servicios:
+    activa: true
+    antetitulo: Servicios
+    titulo: En qué puedo ayudarte
+    texto: "Sesiones de 50 minutos, normalmente cada semana al principio y más espaciadas después."
+    imagen: /fotos/sesion-online.jpg
+    items:
+      - { titulo: Primera consulta, texto: "Nos conocemos, me cuentas qué te trae y vemos juntas si puedo ayudarte.", icono: calendario, precio: "Gratuita", duracion: "20 min" }
+      - { titulo: Terapia individual para adultos, texto: "Ansiedad, estrés, autoestima, bloqueos y decisiones difíciles.", icono: persona, precio: "60 €", duracion: "50 min" }
+      - { titulo: Terapia para adolescentes, texto: "De 13 a 17 años, con una sesión de orientación para la familia.", icono: hoja, precio: "55 €", duracion: "50 min" }
+      - { titulo: Acompañamiento en el duelo, texto: "Para atravesar una pérdida con apoyo y a tu ritmo.", icono: corazon, precio: "60 €", duracion: "50 min" }
+      - { titulo: Sesión online, texto: "Por videollamada, desde donde estés, con la misma confidencialidad.", icono: portatil, precio: "55 €", duracion: "50 min" }
+    cta: { texto: Pedir primera consulta, url: "/#cita" }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo trabajo
+    titulo: Cuatro pasos, sin letra pequeña
+    items:
+      - { titulo: Primera llamada, texto: "Veinte minutos para conocernos y resolver dudas. Sin compromiso." }
+      - { titulo: Evaluación, texto: "En las primeras sesiones entendemos qué te pasa y qué quieres cambiar." }
+      - { titulo: Plan de trabajo, texto: "Acordamos objetivos, frecuencia y una duración orientativa." }
+      - { titulo: Seguimiento, texto: "Revisamos juntas cómo vas y ajustamos el plan cuando haga falta." }
+
+  opiniones:
+    activa: true
+    antetitulo: Opiniones
+    titulo: Lo que cuentan quienes han venido
+    testimonios:
+      - { texto: "Llegué con mucha ansiedad y sin saber ni por dónde empezar. Clara me dio herramientas desde el primer día y, sobre todo, me sentí escuchada.", autor: Laura G., nota: Terapia individual }
+      - { texto: "Mi hijo no quería ir al psicólogo. A la tercera sesión era él quien me recordaba la cita.", autor: Javier M., nota: Terapia para adolescentes }
+      - { texto: "Hice las sesiones online desde Bilbao y funcionaron igual de bien. Muy cercana y muy clara.", autor: Ainhoa R., nota: Sesión online }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Antes de empezar
+    preguntas:
+      - { pregunta: "¿Cuántas sesiones voy a necesitar?", respuesta: "Depende de cada caso. En la evaluación te doy una estimación y la revisamos juntas cada pocas semanas." }
+      - { pregunta: "¿La terapia online funciona igual?", respuesta: "Sí, para la mayoría de los casos. Solo necesitas un lugar tranquilo y una conexión estable." }
+      - { pregunta: "¿Cómo se pagan las sesiones?", respuesta: "Por transferencia, Bizum o tarjeta, al final de cada sesión. Te doy factura." }
+      - { pregunta: "¿Y si tengo que cancelar una cita?", respuesta: "Avísame con 24 horas de antelación y la cambiamos sin coste." }
+      - { pregunta: "¿Lo que cuento es confidencial?", respuesta: "Siempre. El secreto profesional está en el código deontológico y en la ley." }
+
+  cita:
+    activa: true
+    antetitulo: Primera cita
+    titulo: ¿Hablamos?
+    texto: "Escríbeme por WhatsApp o llámame y buscamos un hueco esta misma semana. La primera llamada no tiene coste."
+    imagen: /fotos/cita.jpg
+    cta: { texto: Escribir por WhatsApp, url: "https://wa.me/34623418905" }
+    enlace_agenda: "https://www.claramontes.es/agenda"
+    texto_agenda: Reservar en la agenda online
+    nota: "Si no puedes venir, avísame con 24 horas y cambiamos la cita sin coste."
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Escríbeme
+    texto: "Respondo en menos de 24 horas laborables. Todo lo que me cuentes es confidencial."
+    imagen: /fotos/portal.jpg
+    boton: Enviar mensaje

@@ -1,0 +1,40 @@
+---
+// Pie de una sola línea: nombre, teléfono, email, redes y aviso legal desde site.yaml.
+// «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false (plan gratis).
+import { site, tel } from '../data/site';
+import Icono from './ui/Icono.astro';
+interface Props { variante?: string }
+const { variante = 'autonomo' } = Astro.props;
+const c = site.contacto;
+const redes = Object.entries(site.redes).filter(([, url]) => url);
+const anio = new Date().getFullYear();
+---
+
+<footer class={`pie pie--${variante}`}>
+  <div class="contenedor pie-linea">
+    <span class="pie-nombre">© {anio} {site.nombre}</span>
+    {c.telefono && <a href={tel(c.telefono)}>{c.telefono}</a>}
+    {c.email && <a href={`mailto:${c.email}`}>{c.email}</a>}
+    {
+      redes.length > 0 && (
+        <ul class="pie-redes">
+          {redes.map(([red, url]) => (
+            <li>
+              <a href={url} rel="noopener" target="_blank" aria-label={red}>
+                <Icono nombre={red} tam={18} />
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+    <a href="/aviso-legal">Aviso legal y privacidad</a>
+    {
+      site.marca_pie && (
+        <span class="pie-noexpertise">
+          Web creada con <a href="https://noexpertise.com" rel="noopener">NoExpertise</a>
+        </span>
+      )
+    }
+  </div>
+</footer>

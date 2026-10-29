@@ -1,0 +1,39 @@
+---
+// Opiniones: `testimonios: [{texto, autor, nota?}]` con comillas grandes. La primera, destacada a todo el ancho;
+// el resto en dos columnas. Sin testimonios no se pinta (la plataforma nunca inventa opiniones).
+import { seccion, cadena } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista = (s?.testimonios ?? []).filter((t) => cadena(t.texto));
+const [primera, ...resto] = lista;
+---
+
+{
+  s && primera && (
+    <Seccion id={Astro.props.id} class="banda">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <figure class="comillas comillas--grande lectura">
+        <blockquote class="comillas-texto">{primera.texto}</blockquote>
+        <figcaption class="mt-6 text-sm">
+          <span class="font-semibold">{primera.autor}</span>
+          {cadena(primera.nota) && <span class="suave"> · {primera.nota}</span>}
+        </figcaption>
+      </figure>
+      {resto.length > 0 && (
+        <div class="mt-16 grid gap-12 md:grid-cols-2 md:gap-14">
+          {resto.map((t) => (
+            <figure class="comillas linea-sup pt-12">
+              <blockquote class="comillas-texto">{t.texto}</blockquote>
+              <figcaption class="mt-5 text-sm">
+                <span class="font-semibold">{t.autor}</span>
+                {cadena(t.nota) && <span class="suave"> · {t.nota}</span>}
+              </figcaption>
+            </figure>
+          ))}
+        </div>
+      )}
+    </Seccion>
+  )
+}

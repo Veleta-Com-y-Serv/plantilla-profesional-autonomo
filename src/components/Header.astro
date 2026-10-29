@@ -1,0 +1,50 @@
+---
+// Cabecera: nombre a la izquierda y menú de texto a la derecha (site.yaml → menu), sin botón.
+// Si site.yaml → boton_cabecera trae url, se añade como un enlace más, resaltado en color, nunca como botón.
+// En móvil, menú plegable sin JavaScript (<details>). Aspecto en src/styles/global.css (.cabecera--autonomo).
+import { site } from '../data/site';
+import type { Enlace } from '../data/site';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'autonomo', cta = null } = Astro.props;
+const extra = cta && cta.url && cta.texto ? cta : null;
+---
+
+<header class={`cabecera cabecera--${variante}`}>
+  <div class="contenedor cabecera-fila">
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {
+        site.logo ? (
+          <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" />
+        ) : (
+          <>
+            <span class="marca-inicial" aria-hidden="true">{site.nombre.trim().charAt(0)}</span>
+            <span class="marca-nombre">{site.nombre}</span>
+          </>
+        )
+      }
+    </a>
+    <nav class="cabecera-nav" aria-label="Menú principal">
+      {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+      {extra && <a href={extra.url} class="cabecera-enlace">{extra.texto}</a>}
+    </nav>
+    {
+      (site.menu.length > 0 || extra) && (
+        <details class="menu-movil">
+          <summary>
+            <span class="menu-movil-icono" aria-hidden="true" />
+            <span>Menú</span>
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {extra && <a href={extra.url}>{extra.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+<script is:inline>
+  document.querySelectorAll('.menu-movil a').forEach(function (a) {
+    a.addEventListener('click', function () { a.closest('details').open = false; });
+  });
+</script>

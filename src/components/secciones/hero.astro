@@ -1,0 +1,50 @@
+---
+// Portada asimétrica 5/7: retrato 3:4 a la izquierda (con bloque de color desplazado) y, a la derecha,
+// nombre, antetítulo, titular grande en serif, texto, recuadro `destacado` {titulo, texto, icono?} y dos botones.
+// Sin imagen, el texto ocupa todo el ancho. Campos vacíos no se pintan.
+import { seccion, site, bloque, enlace, cadena } from '../../data/site';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const destacado = bloque(s?.destacado);
+const iconoDestacado = cadena((s?.destacado as Record<string, unknown> | undefined)?.icono) || 'portatil';
+const cta = enlace(s?.cta);
+const cta2 = enlace(s?.cta_secundario);
+---
+
+{
+  s && (
+    <section id={id} class="overflow-hidden">
+      <div class="contenedor grid items-center gap-10 pt-10 pb-16 md:grid-cols-12 md:gap-10 md:pt-16 md:pb-24">
+        {s.imagen && (
+          <figure class="retrato md:col-span-5">
+            <Imagen src={s.imagen} alt={site.nombre} ancho={900} alto={1200} prioridad={primera} class="aspect-[3/4] w-full object-cover" />
+          </figure>
+        )}
+        <div class:list={[s.imagen ? 'md:col-span-7 lg:pl-10' : 'md:col-span-10']}>
+          <p class="hero-firma">{site.nombre}</p>
+          {s.antetitulo && <p class="antetitulo mt-5">{s.antetitulo}</p>}
+          {s.titulo && <h1 class="hero-titulo">{s.titulo}</h1>}
+          {s.texto && <p class="hero-texto">{s.texto}</p>}
+          {destacado && (
+            <div class="hero-destacado">
+              <Icono nombre={iconoDestacado} class="mt-0.5 shrink-0 text-primario" tam={26} />
+              <div>
+                {destacado.titulo && <p class="font-semibold">{destacado.titulo}</p>}
+                {destacado.texto && <p class="suave text-[.95rem]">{destacado.texto}</p>}
+              </div>
+            </div>
+          )}
+          {(cta || cta2) && (
+            <div class="mt-9 flex flex-wrap items-center gap-x-6 gap-y-4">
+              {cta && <a class="btn" href={cta.url}>{cta.texto}</a>}
+              {cta2 && <a class="btn-sec" href={cta2.url}>{cta2.texto}</a>}
+            </div>
+          )}
+        </div>
+      </div>
+    </section>
+  )
+}

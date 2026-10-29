@@ -1,0 +1,21 @@
+id: profesional-autonomo
+nombre: Profesional independiente
+descripcion: Web personal para psicólogos, coaches, consultores y otros profesionales que trabajan por su cuenta.
+sectores: [autonomo, consultor, coach, psicologia, nutricion, freelance, formador]
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: sobre, nombre: Sobre mí }
+  - { id: trayectoria, nombre: Trayectoria }
+  - { id: servicios, nombre: Servicios }
+  - { id: proceso, nombre: Cómo trabajo }
+  - { id: opiniones, nombre: Opiniones }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: cita, nombre: Pedir cita }
+  - { id: contacto, nombre: Contacto }
+estilo: personal
+plan_minimo: gratis
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-profesional-autonomo.noexpertise.com
+activa: true
+orden: 150

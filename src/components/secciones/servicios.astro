@@ -1,0 +1,50 @@
+---
+// Servicios: lista grande sin tarjetas, separada por líneas finas.
+// `items: [{titulo, texto, icono, precio, duracion}]`: precio y duración son opcionales (vacíos no se pintan).
+// `imagen` opcional como franja panorámica sobre la lista; `cta` opcional al final.
+import { seccion, cadena } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {s.imagen && <Imagen src={s.imagen} alt="" ancho={1600} alto={686} class="mb-12 aspect-[16/9] w-full rounded-md object-cover md:aspect-[21/9]" />}
+      {s.items.length > 0 && (
+        <ul class="lista-servicios">
+          {s.items.map((it) => {
+            const precio = cadena(it.precio);
+            const duracion = cadena(it.duracion);
+            return (
+              <li>
+                <Icono nombre={it.icono} class="mt-1 text-primario" tam={28} />
+                <div>
+                  <h3 class="text-[1.5rem] md:text-[1.85rem]">{it.titulo}</h3>
+                  {it.texto && <p class="suave mt-2 max-w-[38rem]">{it.texto}</p>}
+                </div>
+                {(precio || duracion) && (
+                  <p class="servicio-meta">
+                    {precio && <span class="servicio-precio">{precio}</span>}
+                    {duracion && (
+                      <span class="suave inline-flex items-center gap-1.5 text-sm">
+                        <Icono nombre="reloj" tam={16} />
+                        {duracion}
+                      </span>
+                    )}
+                  </p>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+      {s.cta?.url && <a class="btn mt-10" href={s.cta.url}>{s.cta.texto}</a>}
+    </Seccion>
+  )
+}

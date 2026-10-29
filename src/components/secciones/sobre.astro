@@ -1,0 +1,64 @@
+---
+// Sobre mí: columna de lectura estrecha (44 rem) con capitular y `declaracion` opcional entre comillas grandes;
+// a un lado `imagen` (3:4) y `items` (formación, colegiación, idiomas…) como lista con icono.
+// `galeria` opcional: tira de fotos del espacio bajo el texto. Todo lo vacío se omite.
+import { seccion, parrafos, cadena } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const declaracion = cadena(s?.declaracion);
+const lateral = !!(s && (s.imagen || s.items.length > 0));
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <div class:list={['grid gap-12', lateral && 'lg:grid-cols-12 lg:gap-10']}>
+        <div class="lectura lg:col-span-7">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} class="mb-8!" />
+          {declaracion && (
+            <blockquote class="comillas comillas--grande mb-10 mt-12">
+              <p class="comillas-texto">{declaracion}</p>
+            </blockquote>
+          )}
+          <div class="texto-lectura">
+            {parrafos(s.texto).map((p) => <p>{p}</p>)}
+          </div>
+          {s.cta?.url && <a class="btn mt-9" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+        {lateral && (
+          <aside class="lg:col-span-4 lg:col-start-9">
+            {s.imagen && <Imagen src={s.imagen} alt="" ancho={900} alto={1200} class="aspect-[3/4] w-full rounded-md object-cover" />}
+            {s.items.length > 0 && (
+              <ul class:list={['datos-contacto', s.imagen && 'mt-8']}>
+                {s.items.map((it) => (
+                  <li>
+                    <span class="grid size-10 shrink-0 place-items-center rounded-full bg-primario/10 text-primario">
+                      <Icono nombre={it.icono} tam={20} />
+                    </span>
+                    <div>
+                      <p class="font-semibold leading-snug">{it.titulo}</p>
+                      {it.texto && <p class="suave text-sm">{it.texto}</p>}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </aside>
+        )}
+      </div>
+      {s.galeria.length > 0 && (
+        <ul class="mt-14 grid grid-cols-3 gap-2 md:mt-20 md:gap-5">
+          {s.galeria.map((g) => (
+            <li>
+              <Imagen src={g} alt="" ancho={900} alto={675} class="aspect-square w-full rounded-md object-cover sm:aspect-[4/3]" />
+            </li>
+          ))}
+        </ul>
+      )}
+    </Seccion>
+  )
+}

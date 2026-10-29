@@ -1,0 +1,38 @@
+---
+// Trayectoria: línea de tiempo vertical con puntos a partir de `hitos: [{anio, titulo, texto}]`.
+// A la izquierda, titular, `texto` e `imagen` opcional (fija al hacer scroll en escritorio).
+// Sin hitos no se pinta nada (la plataforma nunca los inventa).
+import { seccion, cadena } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const hitos = (s?.hitos ?? []).filter((h) => cadena(h.titulo));
+---
+
+{
+  s && hitos.length > 0 && (
+    <Seccion id={Astro.props.id} class="banda">
+      <div class="grid gap-12 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-4">
+          <div class="lg:sticky lg:top-28">
+            <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} class="mb-8!" />
+            {s.imagen && <Imagen src={s.imagen} alt="" ancho={800} alto={1200} class="hidden aspect-[2/3] w-full max-w-xs rounded-md object-cover lg:block" />}
+          </div>
+        </div>
+        <ol class="linea-tiempo lectura lg:col-span-7 lg:col-start-6">
+          {hitos.map((h) => (
+            <li>
+              <p class="hito-anio">{cadena(h.anio)}</p>
+              <div>
+                <h3 class="text-[1.35rem]">{h.titulo}</h3>
+                {cadena(h.texto) && <p class="suave mt-2">{h.texto}</p>}
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </Seccion>
+  )
+}

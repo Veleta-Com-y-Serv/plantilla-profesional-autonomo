@@ -1,0 +1,48 @@
+---
+// Pedir cita: bloque oscuro con titular grande, `texto`, `cta` (WhatsApp o teléfono) y, si hay
+// `enlace_agenda` (url de una agenda online), un segundo botón con `texto_agenda`. `nota` en pequeño debajo.
+// `imagen` opcional a la derecha. El teléfono de site.yaml → contacto se muestra si existe.
+import { seccion, site, tel, cadena, enlace } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const cta = enlace(s?.cta);
+const agenda = cadena(s?.enlace_agenda);
+const textoAgenda = cadena(s?.texto_agenda) || 'Agenda online';
+const nota = cadena(s?.nota);
+const telefono = site.contacto.telefono;
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="oscuro">
+      <div class:list={['grid items-center gap-12', s.imagen && 'md:grid-cols-12']}>
+        <div class:list={[s.imagen ? 'md:col-span-7' : 'lectura']}>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="mt-4 text-[clamp(2.4rem,7vw,5rem)] leading-[1.02]">{s.titulo}</h2>}
+          {s.texto && <p class="suave mt-6 max-w-[36rem] text-lg">{s.texto}</p>}
+          {(cta || agenda) && (
+            <div class="mt-9 flex flex-wrap gap-4">
+              {cta && <a class="btn btn-claro" href={cta.url}>{cta.texto}</a>}
+              {agenda && <a class="btn btn-borde" href={agenda} rel="noopener" target="_blank">{textoAgenda}</a>}
+            </div>
+          )}
+          {telefono && (
+            <p class="mt-8">
+              <a class="inline-flex items-center gap-3 font-display text-2xl no-underline hover:underline" href={tel(telefono)}>
+                <Icono nombre="telefono" tam={22} />
+                {telefono}
+              </a>
+            </p>
+          )}
+          {nota && <p class="suave mt-6 max-w-[36rem] text-sm">{nota}</p>}
+        </div>
+        {s.imagen && (
+          <Imagen src={s.imagen} alt="" ancho={900} alto={1125} class="aspect-[4/5] w-full max-w-md justify-self-end rounded-md object-cover md:col-span-5" />
+        )}
+      </div>
+    </Seccion>
+  )
+}

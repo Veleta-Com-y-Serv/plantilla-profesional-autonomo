@@ -1,0 +1,20 @@
+---
+import Base from '../layouts/Base.astro';
+import { site } from '../data/site';
+---
+
+<Base titulo="Página no encontrada">
+  <section class="contenedor py-24 md:py-36">
+    <div class="lectura">
+      <p class="antetitulo">Error 404</p>
+      <h1 class="titulo-seccion">Esta página no existe</h1>
+      <blockquote class="comillas mt-10">
+        <p class="comillas-texto">Puede que el enlace esté mal o que la página se haya movido.</p>
+      </blockquote>
+      <div class="mt-10 flex flex-wrap items-center gap-6">
+        <a class="btn" href="/">Volver al inicio</a>
+        {site.contacto.email && <a class="btn-sec" href={`mailto:${site.contacto.email}`}>{site.contacto.email}</a>}
+      </div>
+    </div>
+  </section>
+</Base>

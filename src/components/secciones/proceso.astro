@@ -1,0 +1,31 @@
+---
+// Cómo trabajo: `items` (3-4 pasos) en columnas con número grande en serif y línea fina superior.
+// Se adapta al número de pasos; sin pasos solo queda el titular (o nada si tampoco hay título).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const n = s?.items.length ?? 0;
+const columnas = n >= 4 ? 'md:grid-cols-2 lg:grid-cols-4' : n === 3 ? 'md:grid-cols-3' : n === 2 ? 'md:grid-cols-2' : '';
+---
+
+{
+  s && (n > 0 || s.titulo) && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {n > 0 && (
+        <ol class:list={['grid gap-x-8 gap-y-10', columnas]}>
+          {s.items.map((it, i) => (
+            <li class="linea-sup pt-6">
+              <p class="paso-num" aria-hidden="true">{i + 1}</p>
+              <h3 class="mt-4 text-[1.35rem]">{it.titulo}</h3>
+              {it.texto && <p class="suave mt-2">{it.texto}</p>}
+            </li>
+          ))}
+        </ol>
+      )}
+      {s.cta?.url && <a class="btn mt-12" href={s.cta.url}>{s.cta.texto}</a>}
+    </Seccion>
+  )
+}
